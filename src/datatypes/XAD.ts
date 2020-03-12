@@ -1,20 +1,36 @@
-import { HL7Obj } from '../base/HL7Obj';
-import { ST } from './ST';
-import { ID } from './ID';
-import { IS } from './IS';
+import {HL7Obj, Depth} from '../base';
+import {ST} from './ST';
+import {ID} from './ID';
+import {IS} from './IS';
 
+/**
+ * Extended Address
+ * @see https://hl7-definition.caristix.com/v2/HL7v2.3/DataTypes/XAD
+ */
 export class XAD extends HL7Obj {
-    street: ST = new ST(this.depth.peekDown());
-    other: ST = new ST(this.depth.peekDown());
-    city: ST = new ST(this.depth.peekDown());
-    zip: ST = new ST(this.depth.peekDown());
-    country: ID = new ID(this.depth.peekDown());
-    address_type: ID = new ID(this.depth.peekDown());
-    other_geographic_designation: ST = new ST(this.depth.peekDown());
-    country_code: IS = new IS(this.depth.peekDown());
-    census_tract: IS = new IS(this.depth.peekDown());
+  street: ST;
+  other: ST;
+  city: ST;
+  zip: ST;
+  country: ID;
+  address_type: ID;
+  other_geographic_designation: ST;
+  country_code: IS;
+  census_tract: IS;
 
-    hl7_obj_array = [
+  constructor(depth: Depth) {
+    super(depth);
+    this.street = new ST(this.depth.peekDown());
+    this.other = new ST(this.depth.peekDown());
+    this.city = new ST(this.depth.peekDown());
+    this.zip = new ST(this.depth.peekDown());
+    this.country = new ID(this.depth.peekDown());
+    this.address_type = new ID(this.depth.peekDown());
+    this.other_geographic_designation = new ST(this.depth.peekDown());
+    this.country_code = new IS(this.depth.peekDown());
+    this.census_tract = new IS(this.depth.peekDown());
+
+    this.hl7_obj_array = [
       this.street,
       this.other,
       this.city,
@@ -24,5 +40,6 @@ export class XAD extends HL7Obj {
       this.other_geographic_designation,
       this.country_code,
       this.census_tract,
-    ]
+    ];
+  }
 }

@@ -11,28 +11,54 @@ export class HL7Obj {
   }
 
   fromString(input: String): void {
-    if (input == undefined) {
+    if (input === undefined) {
       this.hl7_obj_array.forEach(value => {
         value.fromString('');
       });
     }
     const splits = input.split(this.depth.peekDown().getDelimeter());
+
+    // TODO: Melhorar essa parte
+    if (splits[0] === 'MSH') {
+      const msh = input.substring(0, 3);
+      const delimeter = input.substring(3, 4);
+      splits.shift();
+      splits.unshift(msh, delimeter);
+    }
+
     for (
-      let split_index = 0;
-      split_index < this.hl7_obj_array.length;
-      split_index++
+      let splitIndex = 0;
+      splitIndex < this.hl7_obj_array.length;
+      splitIndex++
     ) {
-      this.hl7_obj_array[split_index]
+      this.hl7_obj_array[splitIndex]
         .setDepth(this.depth.peekDown())
-        .fromString(splits[split_index] || '');
+        .fromString(splits[splitIndex] || '');
     }
   }
   toString(): String {
     const stringify = this.hl7_obj_array.map(value => {
       return value.setDepth(this.depth.peekDown()).toString();
     });
+    let msh = undefined;
+    let delimeter = undefined;
+
+    // TODO: Melhorar essa parte
+    if (stringify[0] === 'MSH') {
+      msh = stringify.shift();
+      delimeter = stringify.shift();
+    }
+    // END
+
     let ret = stringify.join(this.depth.peekDown().getDelimeter());
     ret = this.removeTrailingDelimeter(ret);
+
+    // TODO: Melhorar essa parte
+    if (msh && delimeter) {
+      ret = `${msh}${delimeter}${ret}`;
+    }
+    // END
+
     return ret;
   }
 
@@ -42,7 +68,7 @@ export class HL7Obj {
       return input;
     }
 
-    if (input[input.length - 1] == delim) {
+    if (input[input.length - 1] === delim) {
       return this.removeTrailingDelimeter(input.substring(0, input.length - 1));
     } else {
       return input;

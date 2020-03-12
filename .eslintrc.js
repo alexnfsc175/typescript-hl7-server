@@ -160,6 +160,8 @@ module.exports = {
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
     '@typescript-eslint/no-extra-non-null-assertion': 'error',
     '@typescript-eslint/return-await': 'error',
+    '@typescript-eslint/class-name-casing': 'off', // Require PascalCased class and interface names
+    '@typescript-eslint/camelcase': 'off',
   },
 
   overrides: [

@@ -26,17 +26,17 @@ export class Depth {
     }
   }
   peekDown(): Depth {
-    let peek_depth = this.depth + 1;
-    if (peek_depth > 4) {
-      peek_depth = 4;
+    let peekDepth = this.depth + 1;
+    if (peekDepth > 4) {
+      peekDepth = 4;
     }
-    return new Depth(peek_depth);
+    return new Depth(peekDepth);
   }
   peekUp(): Depth {
-    let peek_depth = this.depth - 1;
-    if (peek_depth < 0) {
-      peek_depth = 0;
+    let peekDepth = this.depth - 1;
+    if (peekDepth < 0) {
+      peekDepth = 0;
     }
-    return new Depth(peek_depth);
+    return new Depth(peekDepth);
   }
 }

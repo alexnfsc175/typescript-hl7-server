@@ -1,22 +1,39 @@
-import { HL7Obj } from '../base/HL7Obj';
-import { IS } from './IS';
-import { HD } from './HD';
-import { ST } from './ST';
+import {HL7Obj, Depth} from '../base';
+import {IS} from './IS';
+import {HD} from './HD';
+import {ST} from './ST';
 
 //<point of care (IS )> ^ <room (IS )> ^ <bed (IS)> ^ <facility (HD)> ^ < location status (IS )> ^ <person location type (IS)> ^ <building (IS )> ^ <floor (IS )> ^ <location description (ST)>
 
+/**
+ * Person Location
+ * @see https://hl7-definition.caristix.com/v2/HL7v2.3/DataTypes/PL
+ */
 export class PL extends HL7Obj {
-    point_of_care: IS = new IS(this.depth.peekDown());
-    room: IS = new IS(this.depth.peekDown());
-    bed: IS = new IS(this.depth.peekDown());
-    facility: HD = new HD(this.depth.peekDown());
-    location_status: IS = new IS(this.depth.peekDown());
-    person_location_type: IS = new IS(this.depth.peekDown());
-    building: IS = new IS(this.depth.peekDown());
-    floor: IS = new IS(this.depth.peekDown());
-    location_description: ST = new ST(this.depth.peekDown());
+  point_of_care: IS;
+  room: IS;
+  bed: IS;
+  facility: HD;
+  location_status: IS;
+  person_location_type: IS;
+  building: IS;
+  floor: IS;
+  location_description: ST;
 
-    hl7_obj_array = [
+  constructor(depth: Depth) {
+    super(depth);
+
+    this.point_of_care = new IS(this.depth.peekDown());
+    this.room = new IS(this.depth.peekDown());
+    this.bed = new IS(this.depth.peekDown());
+    this.facility = new HD(this.depth.peekDown());
+    this.location_status = new IS(this.depth.peekDown());
+    this.person_location_type = new IS(this.depth.peekDown());
+    this.building = new IS(this.depth.peekDown());
+    this.floor = new IS(this.depth.peekDown());
+    this.location_description = new ST(this.depth.peekDown());
+
+    this.hl7_obj_array = [
       this.point_of_care,
       this.room,
       this.bed,
@@ -26,5 +43,6 @@ export class PL extends HL7Obj {
       this.building,
       this.floor,
       this.location_description,
-    ]
+    ];
+  }
 }
