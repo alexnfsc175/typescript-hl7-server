@@ -1,4 +1,4 @@
-import { Field } from './field';
+import {Field} from './field';
 
 export class Segment {
   name: string;
@@ -16,9 +16,9 @@ export class Segment {
         if (Array.isArray(element)) {
           const fields: Field[] = [];
 
-          for (let i = 0; i < element.length; i++) {
-            fields.push(new Field(element[i]));
-          }
+          // for (let i = 0; i < element.length; i++) {
+          //   fields.push(new Field(element[i]));
+          // }
           this.fields.push(fields);
         } else {
           if (index >= 1) {

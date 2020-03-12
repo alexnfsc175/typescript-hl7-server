@@ -82,6 +82,10 @@
     "target": "es2017",
     "sourceMap": true,
     "declaration": true,
-    "importHelpers": true
-  }
+    "importHelpers": true,
+
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"]
 }

@@ -14,11 +14,11 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    mocha: true
+    mocha: true,
   },
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -34,9 +34,9 @@ module.exports = {
     createDefaultProgram: true,
     ecmaFeatures: {
       ecmaVersion: 2018,
-      jsx: false
+      jsx: false,
     },
-    noWatch: true
+    noWatch: true,
   },
   extends: [
     'eslint:recommended',
@@ -46,7 +46,7 @@ module.exports = {
      * See https://github.com/prettier/eslint-config-prettier
      */
     'prettier',
-    'prettier/@typescript-eslint'
+    'prettier/@typescript-eslint',
   ],
   rules: {
     // indent: ['error', 4],
@@ -138,8 +138,8 @@ module.exports = {
          * ```
          */
         varsIgnorePattern: 'inject|(\\w+)Bindings',
-        ignoreRestSiblings: false
-      }
+        ignoreRestSiblings: false,
+      },
     ], // tslint:no-unused-variable
     'no-unused-expressions': 'error', // tslint:no-unused-expression
     'no-var': 'error', // tslint:no-var-keyword
@@ -158,7 +158,7 @@ module.exports = {
     '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
     '@typescript-eslint/no-extra-non-null-assertion': 'error',
-    '@typescript-eslint/return-await': 'error'
+    '@typescript-eslint/return-await': 'error',
   },
 
   overrides: [
@@ -166,10 +166,10 @@ module.exports = {
       files: ['**/*.js'],
       rules: {
         '@typescript-eslint/prefer-optional-chain': 'off',
-        '@typescript-eslint/prefer-nullish-coalescing': 'off'
-      }
-    }
-  ]
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      },
+    },
+  ],
 };
 
 /**

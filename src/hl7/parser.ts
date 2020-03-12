@@ -1,4 +1,4 @@
-import { Delimiters } from './delimiters';
+import {Delimiters} from './delimiters';
 
 export interface ParserOptions {
   segmentSeperator: string;

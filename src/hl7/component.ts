@@ -1,4 +1,4 @@
-import { Delimiters } from './delimiters';
+import {Delimiters} from './delimiters';
 
 export class Component {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
