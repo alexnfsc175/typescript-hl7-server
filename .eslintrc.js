@@ -49,10 +49,10 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
-    // indent: ['error', 4],
-    // 'linebreak-style': ['error', 'unix'],
-    // quotes: ['error', 'single'],
-    // semi: ['error', 'always']
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
     'prefer-const': 'error',
     'no-mixed-operators': 'off',
     'no-console': 'off',
