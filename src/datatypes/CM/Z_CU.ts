@@ -1,10 +1,9 @@
-import { HL7Obj } from '../../base/HL7Obj';
+import {HL7Obj, Depth} from '../../base';
 
-import { TS } from '../TS';
-import { IS } from '../IS';
-import { HD } from '../HD';
-import { CN } from '..';
-import { ST } from '../ST';
+import {TS} from '../TS';
+import {IS} from '../IS';
+import {HD} from '../HD';
+import {ST} from '../ST';
 
 /**
  * Clinical User - OBR
@@ -14,19 +13,34 @@ import { ST } from '../ST';
  *  - transcriptionist
  */
 export class Z_CU extends HL7Obj {
-    name: ST = new ST(this.depth.peekDown()); // TODO: FIX CN
-    start_datetime: TS = new TS(this.depth.peekDown());
-    end_datetime: TS = new TS(this.depth.peekDown());
-    point_of_care: IS = new IS(this.depth.peekDown());
-    room: IS = new IS(this.depth.peekDown());
-    bed: IS = new IS(this.depth.peekDown());
-    facility: HD = new HD(this.depth.peekDown());
-    location_satus: IS = new IS(this.depth.peekDown());
-    patient_location_type: IS = new IS(this.depth.peekDown());
-    building: IS = new IS(this.depth.peekDown());
-    floor: IS = new IS(this.depth.peekDown());
+  name: ST; // TODO: FIX CN
+  start_datetime: TS;
+  end_datetime: TS;
+  point_of_care: IS;
+  room: IS;
+  bed: IS;
+  facility: HD;
+  location_satus: IS;
+  patient_location_type: IS;
+  building: IS;
+  floor: IS;
 
-    hl7_obj_array = [
+  constructor(depth: Depth) {
+    super(depth);
+
+    this.name = new ST(this.depth.peekDown()); // TODO: FIX CN
+    this.start_datetime = new TS(this.depth.peekDown());
+    this.end_datetime = new TS(this.depth.peekDown());
+    this.point_of_care = new IS(this.depth.peekDown());
+    this.room = new IS(this.depth.peekDown());
+    this.bed = new IS(this.depth.peekDown());
+    this.facility = new HD(this.depth.peekDown());
+    this.location_satus = new IS(this.depth.peekDown());
+    this.patient_location_type = new IS(this.depth.peekDown());
+    this.building = new IS(this.depth.peekDown());
+    this.floor = new IS(this.depth.peekDown());
+
+    this.hl7_obj_array = [
       this.name,
       this.start_datetime,
       this.end_datetime,
@@ -38,5 +52,6 @@ export class Z_CU extends HL7Obj {
       this.patient_location_type,
       this.building,
       this.floor,
-    ]
+    ];
+  }
 }

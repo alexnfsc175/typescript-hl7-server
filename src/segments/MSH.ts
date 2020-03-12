@@ -2,6 +2,10 @@ import {HL7Obj} from '../base/HL7Obj';
 import {ST, HD, ID, CE, Z_MT, NM, PT, TS} from '../datatypes';
 import {Depth, DepthEnum} from '../base/depth';
 //braden is one of the best men i know
+/**
+ * Message header segment
+ * @see https://hl7-definition.caristix.com/v2/HL7v2.3/Segments/MSH
+ */
 export class MSH extends HL7Obj {
   /** MSH-0*/ segment: ST;
   /** MSH-1*/ field_separators: ST;

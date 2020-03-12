@@ -1,4 +1,4 @@
-import {HL7Obj} from '../../base/HL7Obj';
+import {HL7Obj, Depth} from '../../base';
 import {ST} from '../ST';
 import {DT} from '../DT';
 /**
@@ -6,9 +6,17 @@ import {DT} from '../DT';
  */
 
 export class Z_AI extends HL7Obj {
-  authorization_number: ST = new ST(this.depth.peekDown());
-  date: DT = new DT(this.depth.peekDown());
-  source: ST = new ST(this.depth.peekDown());
+  authorization_number: ST;
+  date: DT;
+  source: ST;
 
-  hl7_obj_array = [this.authorization_number, this.date, this.source];
+  constructor(depth: Depth) {
+    super(depth);
+
+    this.authorization_number = new ST(this.depth.peekDown());
+    this.date = new DT(this.depth.peekDown());
+    this.source = new ST(this.depth.peekDown());
+
+    this.hl7_obj_array = [this.authorization_number, this.date, this.source];
+  }
 }

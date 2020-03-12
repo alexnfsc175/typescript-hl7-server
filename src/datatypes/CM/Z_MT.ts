@@ -1,14 +1,18 @@
-import { HL7Obj } from '../../base/HL7Obj';
-import { ST } from '../ST';
+import {HL7Obj, Depth} from '../../base';
+import {ST} from '../ST';
 /**
  * CM for MSH-8 <message type>
  */
 export class Z_MT extends HL7Obj {
-    event: ST = new ST(this.depth.peekDown());
-    trigger: ST = new ST(this.depth.peekDown());
+  event: ST;
+  trigger: ST;
 
-    hl7_obj_array = [
-      this.event,
-      this.trigger
-    ]
+  constructor(depth: Depth) {
+    super(depth);
+
+    this.event = new ST(this.depth.peekDown());
+    this.trigger = new ST(this.depth.peekDown());
+
+    this.hl7_obj_array = [this.event, this.trigger];
+  }
 }

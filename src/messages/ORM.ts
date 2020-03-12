@@ -1,2 +1,2 @@
-import {HL7Obj} from '../base/HL7Obj';
-import {MSH, PID, IN1} from '../segments';
+export {HL7Obj} from '../base';
+export {MSH, PID, IN1} from '../segments';

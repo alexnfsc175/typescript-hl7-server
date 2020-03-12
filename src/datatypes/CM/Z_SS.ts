@@ -1,24 +1,35 @@
-import { HL7Obj } from '../../base/HL7Obj';
-import { CE } from '../CE';
-import { TX } from '../TX';
+import {HL7Obj, Depth} from '../../base';
+import {CE} from '../CE';
+import {TX} from '../TX';
 /**
  * CM for OBR - speciemen_source
  */
 
 export class Z_SS extends HL7Obj {
-    specimen_name: CE = new CE(this.depth.peekDown());
-    additives: TX = new TX(this.depth.peekDown());
-    freetext: TX = new TX(this.depth.peekDown());
-    body_site: CE = new CE(this.depth.peekDown());
-    site_modifier: CE = new CE(this.depth.peekDown());
-    collection_method_modifier_code: CE = new CE(this.depth.peekDown());
+  specimen_name: CE;
+  additives: TX;
+  freetext: TX;
+  body_site: CE;
+  site_modifier: CE;
+  collection_method_modifier_code: CE;
 
-    hl7_obj_array = [
+  constructor(depth: Depth) {
+    super(depth);
+
+    this.specimen_name = new CE(this.depth.peekDown());
+    this.additives = new TX(this.depth.peekDown());
+    this.freetext = new TX(this.depth.peekDown());
+    this.body_site = new CE(this.depth.peekDown());
+    this.site_modifier = new CE(this.depth.peekDown());
+    this.collection_method_modifier_code = new CE(this.depth.peekDown());
+
+    this.hl7_obj_array = [
       this.specimen_name,
       this.additives,
       this.freetext,
       this.body_site,
       this.site_modifier,
-      this.collection_method_modifier_code
-    ]
+      this.collection_method_modifier_code,
+    ];
+  }
 }
