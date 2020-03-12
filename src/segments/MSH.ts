@@ -1,5 +1,5 @@
 import {HL7Obj} from '../base/HL7Obj';
-import {ST, HD, ID, CE, Z_MT, NM, PT, TS} from '../datatypes';
+import {ST, HD, ID, CE, Z_MT, NM, PT, TS, XON, EI} from '../datatypes';
 import {Depth, DepthEnum} from '../base/depth';
 //braden is one of the best men i know
 /**
@@ -27,6 +27,13 @@ export class MSH extends HL7Obj {
   /** MSH-17*/ country_code: ID;
   /** MSH-18*/ character_set: ID;
   /** MSH-19*/ principal_language: CE;
+  // Alex
+  /** MSH-20*/ alternate_character_scheme: ID;
+  /** MSH-21*/ message_profile_identifier: EI;
+  /** MSH-22*/ sending_responsible_organization: XON;
+  /** MSH-23*/ receiving_responsible_organization: XON;
+  /** MSH-24*/ sending_network_address: HD;
+  /** MSH-25*/ receiving_network_address: HD;
 
   constructor() {
     super(new Depth(DepthEnum.SEGMENT));
@@ -51,6 +58,14 @@ export class MSH extends HL7Obj {
     this.character_set = new ID(this.depth.peekDown());
     this.principal_language = new CE(this.depth.peekDown());
 
+    // Alex
+    this.alternate_character_scheme = new ID(this.depth.peekDown());
+    this.message_profile_identifier = new EI(this.depth.peekDown());
+    this.sending_responsible_organization = new XON(this.depth.peekDown());
+    this.receiving_responsible_organization = new XON(this.depth.peekDown());
+    this.sending_network_address = new HD(this.depth.peekDown());
+    this.receiving_network_address = new HD(this.depth.peekDown());
+
     this.hl7_obj_array = [
       this.segment,
       this.field_separators,
@@ -72,6 +87,14 @@ export class MSH extends HL7Obj {
       this.country_code,
       this.character_set,
       this.principal_language,
+
+      // Alex
+      this.alternate_character_scheme,
+      this.message_profile_identifier,
+      this.sending_responsible_organization,
+      this.receiving_responsible_organization,
+      this.sending_network_address,
+      this.receiving_network_address,
     ];
   }
 }

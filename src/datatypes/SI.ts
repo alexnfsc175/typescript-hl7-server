@@ -17,13 +17,14 @@ export class SI extends HL7Obj {
   }
   constructor(depth: Depth) {
     super(depth);
+    this.value = 0;
     this.hl7_obj_array = [(this.value as unknown) as SI];
   }
   fromString(input: string): void {
     this.shouldBeBlank = !this.isNumericalCharacter(input);
     this.value = Number(input);
-    console.log(this.value);
-    console.log(this.shouldBeBlank);
+    // console.log(this.value);
+    // console.log(this.shouldBeBlank);
   }
   toString() {
     if (this.shouldBeBlank) {

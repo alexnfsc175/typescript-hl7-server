@@ -19,6 +19,7 @@ export class NM extends HL7Obj {
 
   constructor(depth: Depth) {
     super(depth);
+    this.value = 0;
     this.hl7_obj_array = [(this.value as unknown) as NM];
   }
   fromString(input: string): void {

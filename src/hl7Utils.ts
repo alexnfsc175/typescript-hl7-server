@@ -1,9 +1,13 @@
-import { MSA, MSH } from './segments';
+import {MSA, MSH} from './segments';
+import {HL7Obj} from './base';
 
 export function normalizeNewLines(input: string): string {
   let normalized_newlines = input.replace(new RegExp(/\r/, 'g'), '\n');
   // console.log(typeof (normalizeNewlines))
-  normalized_newlines = normalized_newlines.replace(new RegExp(/\n{2,}/, 'g'), '\n');
+  normalized_newlines = normalized_newlines.replace(
+    new RegExp(/\n{2,}/, 'g'),
+    '\n',
+  );
   return normalized_newlines;
 }
 
@@ -11,12 +15,27 @@ export function getSegmentNameFromString(input: string): string {
   return input.substr(0, 3);
 }
 
+export async function buildSegmentNameFromString(
+  input: string,
+): Promise<HL7Obj> {
+  let Segment = undefined;
+  const segmentName = getSegmentNameFromString(input);
+  try {
+    Segment = await import(`./segments/${segmentName}`);
+  } catch (e) {
+    console.error(e);
+  }
+  // console.log(new Segment[segmentName](input));
+  const instance = new Segment[segmentName]() as HL7Obj;
+  instance.fromString(input);
+  return instance;
+}
+
 export function getMSHFromMessage(input: string): MSH {
   const msh_string = input.split('\n')[0];
   const msh = new MSH();
   msh.fromString(msh_string);
   return msh;
-
 }
 
 export function wrapInMLLP(data: string): string {
@@ -27,10 +46,12 @@ export function wrapInMLLP(data: string): string {
   return VT + data + FS + CR;
 }
 
-export function buildACK(message: string, ack_code: string, error_message = ''): string {
-
+export function buildACK(
+  message: string,
+  ack_code: string,
+  error_message = '',
+): string {
   const msh_string = message.split('\n')[0];
-
 
   const msh = new MSH();
   const ack_msh = new MSH();
@@ -50,5 +71,4 @@ export function buildACK(message: string, ack_code: string, error_message = ''):
   ack_msa.message_control_id.fromString(msh.message_control_id.toString());
 
   return [ack_msh.toString(), ack_msa.toString()].join('\n');
-
 }
