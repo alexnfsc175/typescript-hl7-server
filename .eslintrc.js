@@ -162,6 +162,12 @@ module.exports = {
     '@typescript-eslint/return-await': 'error',
     '@typescript-eslint/class-name-casing': 'off', // Require PascalCased class and interface names
     '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: false,
+      },
+    ],
   },
 
   overrides: [
