@@ -2,8 +2,8 @@
   "name": "hl7-component",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
+    "build": "tsc --p tsconfig.build.json",
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
     "prettier:cli": "prettier \"**/*.ts\" \"**/*.js\"",
@@ -27,5 +27,13 @@
     "prettier": "^1.19.1",
     "source-map-support": "^0.5.16",
     "typescript": "^3.8.3"
-  }
+  },
+    "files": [
+    "README.md",
+    "index.js",
+    "index.d.ts",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ]
 }
