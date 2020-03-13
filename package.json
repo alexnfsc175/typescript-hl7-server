@@ -1,5 +1,5 @@
 {
-  "name": "typescript-hl7-server",
+  "name": "hl7-component",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
