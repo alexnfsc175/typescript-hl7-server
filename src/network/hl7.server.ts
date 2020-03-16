@@ -2,6 +2,24 @@ import * as net from 'net';
 import {EventEmitter} from 'events';
 import {buildACK} from '../hl7Utils';
 
+export interface Message {
+  message: string;
+  socket: net.Socket;
+  isMllp: boolean;
+}
+
+export interface Events {
+  message: (message: Message) => void;
+}
+
+export interface HL7Server {
+  start(): void;
+  stop(): void;
+  wrapInMLLP(data: string): string;
+  on<K extends keyof Events>(event: K, listener: Events[K]): this;
+  on(event: string, listener: Function): this;
+}
+
 interface ServerOptions {
   header?: string;
   trailer?: string;

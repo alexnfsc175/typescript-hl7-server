@@ -15,7 +15,7 @@ const readFile = promisify(fs.readFile);
 const server = new HL7Server('0.0.0.0', 6663);
 server.start();
 server.on('message', async ({message, isMllp}) => {
-  const segments = (<string>message)
+  const segments = message
     .split('\n')
     .filter(s => !!s)
     .map(segment => {
@@ -24,19 +24,25 @@ server.on('message', async ({message, isMllp}) => {
 
   const segmentsInstances = await Promise.all(segments);
 
-  segmentsInstances.forEach(s => {
-    if (s instanceof MSH) {
-      console.log('ip: ', s.message_profile_identifier.universal_id.value);
+  segmentsInstances.forEach(segment => {
+    if (segment instanceof MSH) {
+      console.log(
+        'ip: ',
+        segment.message_profile_identifier.universal_id.value,
+      );
     }
-    if (s instanceof OBR) {
-      console.log('aparelho : ', s.placer_order_number.namespace_id.value);
+    if (segment instanceof OBR) {
+      console.log(
+        'aparelho : ',
+        segment.placer_order_number.namespace_id.value,
+      );
     }
-    if (s instanceof OBX) {
-      console.log('Identifier: ', s.observation_id.id.value);
-      console.log('Text: ', s.observation_id.text.value);
+    if (segment instanceof OBX) {
+      console.log('Identifier: ', segment.observation_id.id.value);
+      console.log('Text: ', segment.observation_id.text.value);
       console.log(
         'Name Of Coding System: ',
-        s.observation_id.coding_system_name.value,
+        segment.observation_id.coding_system_name.value,
       );
     }
   });
@@ -68,7 +74,6 @@ export async function createHL7(path: string) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
 // (async function main() {
 //   // eslint-disable-next-line
 //   const d = await createHL7('C:_Users_Convex_Documents_dev_testHl7');

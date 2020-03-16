@@ -1,9 +1,5 @@
-import {MSH, OBX, PID, OBR} from '../segments';
-import {
-  getSegmentNameFromString,
-  buildSegmentNameFromString,
-} from '../hl7Utils';
-import {NTE} from '../segments/NTE';
+import {MSH, OBR} from '../segments';
+import {buildSegmentNameFromString} from '../hl7Utils';
 
 // const testMSH =
 //   'MSH|^~&|INTELLIGO|MEDICALIS|COREPOINT|HL7|20190809063113||ORM^O01|558108|P|2.5||||||';
